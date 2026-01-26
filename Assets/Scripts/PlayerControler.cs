@@ -7,6 +7,8 @@ public class PlayerControler : MonoBehaviour
     private Rigidbody2D m_rigidbody2D;
     private GatherInput m_gatherInput;
     private Transform m_transform;
+    private Animator m_animator;
+    private int IdSpeed;
     [SerializeField] private  float speed = 5f;
     private int direction = 1;
 
@@ -16,8 +18,14 @@ public class PlayerControler : MonoBehaviour
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_gatherInput = GetComponent<GatherInput>();
         m_transform = GetComponent<Transform>();
+        m_animator = GetComponent<Animator>();
+        IdSpeed = Animator.StringToHash("Speed");
     }
 
+    private void Update()
+    {
+        SetAnimatorValues();
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -38,5 +46,11 @@ public class PlayerControler : MonoBehaviour
             direction *= -1;
         }
        
+    }
+
+    private void SetAnimatorValues()
+    {
+        m_animator.SetFloat(IdSpeed, Math.Abs(m_rigidbody2D.linearVelocityX));
+        
     }
 }
