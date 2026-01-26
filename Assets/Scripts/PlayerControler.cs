@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PlayerControler : MonoBehaviour
     private int IdSpeed;
     [SerializeField] private  float speed = 5f;
     private int direction = 1;
+    [SerializeField] private float jumpForce = 5f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,6 +32,7 @@ public class PlayerControler : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        Jump();
     }
 
     private void Move()
@@ -52,5 +55,14 @@ public class PlayerControler : MonoBehaviour
     {
         m_animator.SetFloat(IdSpeed, Math.Abs(m_rigidbody2D.linearVelocityX));
         
+    }
+
+    private void Jump()
+    {
+        if (m_gatherInput.IsJumping)
+        {
+            m_rigidbody2D.linearVelocity = new Vector2(speed * m_gatherInput.ValueX, jumpForce);
+        }
+        m_gatherInput.IsJumping = false;
     }
 }

@@ -2340,6 +2340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControler
   speed: 4
+  jumpForce: 10
 --- !u!114 &554524326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2353,6 +2354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GatherInput
   _valueX: 0
+  _isJumping: 0
 --- !u!95 &554524327
 Animator:
   serializedVersion: 7
