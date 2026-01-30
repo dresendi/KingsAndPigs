@@ -10,6 +10,7 @@ public class PlayerControler : MonoBehaviour
     private GatherInput m_gatherInput;
     private Transform m_transform;
     private Animator m_animator;
+    private AudioSource jumpSound;
 
     [Header("Move and Jump Settings")]
 
@@ -40,6 +41,7 @@ public class PlayerControler : MonoBehaviour
         idIsGrounded = Animator.StringToHash("isGrounded");
         lFoot = GameObject.Find("LFoot").GetComponent<Transform>();
         rFoot = GameObject.Find("RFoot").GetComponent<Transform>();
+        jumpSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -82,6 +84,7 @@ public class PlayerControler : MonoBehaviour
         {
             if (isGrounded)
                 m_rigidbody2D.linearVelocity = new Vector2(speed * m_gatherInput.ValueX, jumpForce);
+                jumpSound.Play();
             if (counterExtraJumps > 0 && !isGrounded)
             {
                 m_rigidbody2D.linearVelocity = new Vector2(speed * m_gatherInput.ValueX, jumpForce);
